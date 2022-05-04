@@ -29,9 +29,6 @@ class CallTouchCon:
 
     @staticmethod
     def create_item(db: SessionLocal, row: dict) -> None:
-        # TODO передавать сюда list[list] и производить итерацию, а не вызывать на каждый item
-
-        # TODO добавить init в  модель и сделать распаковку args при создании item
         item = CallTouch(
             call_id=row.get('callId'),
             date=str(row.get('date')[0:10]),
