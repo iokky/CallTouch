@@ -9,5 +9,5 @@ bot = telebot.TeleBot(os.getenv('TOKEN'))
 
 
 def send_message(data):
-    consumer = 534017474
+    consumer = os.getenv('USER')
     bot.send_message(consumer, data)

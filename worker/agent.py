@@ -11,7 +11,7 @@ call_touch_agent = CallTouchCon()
 
 def ct_run():
     call_touch_agent.run()
-    send_message('call_touch worker run')
+    send_message('ct_agent done ')
 
 
 scheduler = BackgroundScheduler({'apscheduler.timezone': 'Europe/Moscow'})

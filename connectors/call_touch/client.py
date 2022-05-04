@@ -2,7 +2,6 @@ import os
 import datetime
 from datetime import datetime as dt
 from datetime import timedelta
-import pytz
 
 from dotenv import load_dotenv
 import requests
@@ -19,7 +18,7 @@ class CallTouchCon:
     @staticmethod
     def set_date() -> datetime.date:
         date = (dt.today() - timedelta(1)).strftime('%d/%m/%Y')
-        send_message(f'run with date: {date}')
+        send_message(f'ct_agent_set_date: {date}')
         return date
 
     def get_data(self) -> requests.Request:
@@ -30,9 +29,9 @@ class CallTouchCon:
 
     @staticmethod
     def create_item(db: SessionLocal, row: dict) -> None:
-        # TODO передавать сюда list[list] и производить итерацию, а не вызывать на на каждый item
-        # send_message(f'create_item_function: {row}')
-        # TODO обавить init  модель и сделать распаковку args при создании item
+        # TODO передавать сюда list[list] и производить итерацию, а не вызывать на каждый item
+
+        # TODO добавить init в  модель и сделать распаковку args при создании item
         item = CallTouch(
             call_id=row.get('callId'),
             date=str(row.get('date')[0:10]),
@@ -62,8 +61,8 @@ class CallTouchCon:
     def run(self) -> requests.Request:
         data = self.get_data()
         if data:
-            send_message('data')
+            send_message('ct_agent_run witch data')
         db = SessionLocal()
         for row in data:
             self.create_item(db=db, row=row)
-        return data
+        return
