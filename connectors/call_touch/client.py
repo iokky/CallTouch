@@ -21,8 +21,9 @@ class CallTouchCon:
         send_message(f'ct_agent_set_date: {date}')
         return date
 
-    def get_data(self) -> requests.Request:
-        date = self.set_date()
+    def get_data(self, date=None) -> requests.Request:
+        if date is None:
+            date = self.set_date()
         url = f'http://api.calltouch.ru/calls-service/RestAPI/{os.getenv("CT_CLIENT")}/calls-diary/calls?clientApiId={os.getenv("CT_TOKEN")}&dateFrom={date}&dateTo={date}'
         response = requests.get(url)
         return response.json()
@@ -55,8 +56,8 @@ class CallTouchCon:
             print('double')
             pass
 
-    def run(self) -> requests.Request:
-        data = self.get_data()
+    def run(self, date=None) -> requests.Request:
+        data = self.get_data(date)
         if data:
             send_message('ct_agent_run witch data')
         db = SessionLocal()
